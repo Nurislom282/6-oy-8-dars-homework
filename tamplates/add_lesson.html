@@ -50,7 +50,6 @@
           loading="lazy"
         />
       </a>
-
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -61,18 +60,8 @@
           <a class="nav-link" href="{% url 'lesson_by_course' course.id %}">{{course.name}}</a>
         </li>
           {%endfor%}
-            <a class="text-reset me-3" href="{% url 'add_course' %}">
-            <i class="fas fa-plus"></i>
-            </a>
       </ul>
       <!-- Left links -->
-    </div>
-
-    <div class="d-flex align-items-center">
-      <!-- Icon -->
-    <a class="text-reset me-3" href="{% url 'add_lesson' %}">
-    <i class="fas fa-plus"></i>
-    </a>
     </div>
     <!-- Collapsible wrapper -->
 
@@ -80,36 +69,15 @@
   <!-- Container wrapper -->
 </nav>
 
-<div class="row row-cols-1 row-cols-md-3 g-4 mt-3" style="margin-bottom:150px">
-  {% for lesson in lessons %}
-  <div class="col">
-    <div class="card h-100">
-      <a href="{%url 'detail' lesson.pk%}">
-      {% if lesson.photo %}
-      <img src="{{ lesson.photo.url }}" class="card-img-top" alt="PHOTO"/>
-      {% else %}
-      <img src="https://www.wpbeginner.com/wp-content/uploads/2016/03/uploadfailed.jpg">
-      {% endif %}
-        </a>
-      <div class="card-body">
-        <a href="{%url 'detail' lesson.pk%}">
-        <h5 class="card-title">{{lesson.lesson_name}}</h5>
-        </a>
-          <p class="card-text">
-          {{lesson.description|truncatewords:15}}
-        </p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Qachon Boladi:{{lesson.will_be}}</small>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
-<!--end all -->
+<form method="post" enctype="multipart/form-data" style="margin-top: 25px; border: 1px solid green; width: 900px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
 
 </div>
+
+
 <!-- MDB -->
 <script
   type="text/javascript"
